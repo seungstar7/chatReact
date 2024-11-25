@@ -1,0 +1,100 @@
+.friend-list li {
+  width: 90%;
+  padding: 0.3rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-top: 0.5rem;
+  margin-left: 3rem;
+}
+
+.friend-list li:hover {
+  border-radius: 10px;
+  background-color: #c6eeec;
+}
+
+.profile {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+.profile .friend {
+  font-size: 20px;
+  margin-left: 1rem;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 0.3rem;
+}
+
+.profile .friend .status {
+  font-size: 15px;
+}
+
+.profile .image {
+  border-radius: 50%;
+  align-items: flex-start;
+  flex-direction: row;
+  object-fit: cover;
+  width: 50px;
+  height: 50px;
+}
+
+.input {
+  height: 30px;
+  width: 80%;
+  margin-left: 3rem;
+}
+
+.friend_count {
+  font-size: 15px;
+  margin-left: 3rem;
+}
+
+.findbtn{
+  height: 30px;
+}
+
+.chat{
+  display: block;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: .25rem;
+  margin-left: 20%;
+  padding: .5rem 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  float: right;
+  color: white;
+  border: none;
+  background: #18f2a9;
+}
+
+.del{
+  display: block;
+  border-radius: 10px;
+  text-align: center;
+  float: right;
+  margin: .25rem;
+  padding: .5rem 1rem;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  border: none;
+  background: rgb(228, 52, 52);
+}
+
+h1{
+  text-align: center;
+
+}
+
+
+
+
+
+
+
+
+
