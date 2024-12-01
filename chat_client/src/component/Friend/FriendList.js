@@ -6,6 +6,8 @@ import './Friend.css'
 import { AuthContext } from '../../context/AuthContext';
 import Modal from '../modal/Modal';
 import Topbar from '../../component/topbar/Topbar';
+import profile from '../../profileImg/8726390_user_icon.png'
+import profile2 from '../../profileImg/8726458_user_check_icon.png'
 
 
 
@@ -21,7 +23,7 @@ const FriendList = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
-    
+    const [isNewChat, setNewChat] = useState(false);
     
     const [friendCount, setFriendCount] = useState(0);
     const Navigate = useNavigate();
@@ -76,7 +78,7 @@ const FriendList = () => {
                         alert("해당 아이디의 친구가 없습니다")
                         setfData([]);
                     } else {
-                        alert("친구발견!")
+                        // alert("친구발견!")
                         setfData(res.data);
                     }
                 })
@@ -105,6 +107,11 @@ const FriendList = () => {
 
 
     const joinchat = (params) => {
+        console.log(Auth)
+        if(!Auth){
+            alert("세션정보가 없습니다")
+            Navigate('/')
+        }
         if (params.roomno === null) {
             const talkroom = "" +
                 new Date(Date.now()).getFullYear() +
@@ -120,7 +127,7 @@ const FriendList = () => {
                 url: "http://localhost:3001/createroom",
                 method: 'post',
                 data: {
-                    id: params.id,
+                    id: Auth,
                     fid: params.fid,
                     talkroom: talkroom
                 }
@@ -177,58 +184,68 @@ const FriendList = () => {
 
     }
 
-    const 씨발놈 = {
-        id : "안녕",
-        name : "난 씨벌",
-        pw : "안안랴줌"
-    }
-
-
-
-
 
 
     return (
         
-        <div>
-            <Topbar />
+        <div >
+            <Topbar setFindId = {setFindId} findFriend = {findFriend}/>
             <br />
-            <input
-                type="text"
-                placeholder='아이디 혹은 닉네임으로 친구찾기'
-                onChange={(event) => {
-                    setFindId(event.target.value)
-                }}
-            />
-            <button
-                className='findbtn'
-                onClick={findFriend}
-            >
-                친구 찾기
-            </button>
-            {fdata.map((data) => {
+            {/*<input*/}
+            {/*    type="text"*/}
+            {/*    placeholder='아이디 혹은 닉네임으로 친구찾기'*/}
+            {/*    onChange={(event) => {*/}
+            {/*        setFindId(event.target.value)*/}
+            {/*    }}*/}
+            {/*/>*/}
+            {/*<button*/}
+            {/*    className='findbtn'*/}
+            {/*    onClick={findFriend}*/}
+            {/*>*/}
+            {/*    친구 찾기*/}
+            {/*</button>*/}
+            <ul className="friend-list">
+            {fdata.map((data, idx) => {
                 console.log(data)
                 return (
-                    <h1 key={data.id}><button onClick={() => addfriend(data)}>{data.id} 님을 친구 추가하기</button></h1>
+                    <li key={idx} style={{ cursor: 'pointer' }} onClick={() => listclick(idx)}>
+                            <span className="profile">
+                                <img className="image" src={profile} alt="any"></img>
+                                <span className="friend">
+                                    <p className="name">{data.id}({data.nickname})</p>
+                                    <p className="status">{data.status_msg}</p>
+                                </span>
+                                {isOpen === true && i === idx && (<button className="chat" onClick={() => addfriend(data)} style={{ cursor: 'pointer' }}>친구추가</button>)}
+                                {/*{isOpen === true && i === idx && (<button className="del" style={{ cursor: 'pointer' }}>삭제하기</button>)}*/}
+                            </span>
+                                </li>
+
+
+
+
+                    // <h1 key={idx}><button onClick={() => addfriend(data)}>{(data.ID)} 님을 친구 추가하기</button></h1>
                 )
             })}
 
+            </ul>
 
-            <br />
-            <br />
-            <br />
+
+            {/*<br />*/}
+            {/*<br />*/}
+            {/*<br />*/}
 
 
             {friendCount === 0 && (
 
-                <h1>으이구 친구도 없냐?</h1>
+                <h1>친구를 추가하여 대화를 해보세요!</h1>
             )}
 
                 <p className="friend_count">{id}님의 프로필</p>
                 <ul className="friend-list">
                 <li style={{ cursor: 'pointer' }} onClick={openModal}>
                     <span className="profile">
-                        <img className="image" src="https://placeimg.com/50/50/any" alt="any"></img>
+                        <img className="image" src={isNewChat ? profile : profile2} alt="any"></img>
+                        {/*<img className="image" src="https://placeimg.com/50/50/any" alt="any"></img>*/}
                         <span className="friend">
                             <p className="name">{myData.nickname}</p>
                             <p className="status">{myData.status_msg}</p>
@@ -237,13 +254,15 @@ const FriendList = () => {
                 </li>
                 <br />
                 <p className="friend_count">친구 {friendCount}</p>
-                <Modal open={modalOpen} close={closeModal} save={updatprofile}  data={myData} header={Auth+"님의 프로필수정"}/>
+                <Modal open={modalOpen} close={closeModal} save={updatprofile}  data={myData} header={id+"님의 프로필수정"}/>
 
                 {data.map((data, index) => {
+                    console.log(data)
+                    console.log("채팅 레이어")
                     return (
                         <li key={index} style={{ cursor: 'pointer' }} onDoubleClick={() => joinchat(data)} onClick={() => listclick(index)}>
                             <span className="profile">
-                                <img className="image" src="https://placeimg.com/50/50/any" alt="any"></img>
+                                <img className="image" src={profile} alt="any"></img>
                                 <span className="friend">
                                     <p className="name">{data.fid}({data.nickname})</p>
                                     <p className="status">{data.status_msg}</p>

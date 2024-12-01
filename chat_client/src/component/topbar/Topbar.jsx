@@ -4,13 +4,14 @@ import Person from "@material-ui/icons/Person"
 import Chat from "@material-ui/icons/Chat"
 import Notifications from "@material-ui/icons/Notifications"
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import {useContext, useState} from "react";
 import { AuthContext } from "../../context/AuthContext";
 
-export default function Topbar() {
+export default function Topbar(props) {
   const { Auth } = useContext(AuthContext);
   // console.log(user + "이게 무슨 유저냐")
   //const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  // const [findId,setFindId] = useState('');
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -19,11 +20,16 @@ export default function Topbar() {
         </Link>
       </div>
       <div className="topbarCenter">
+        {/*<button onClick={props.findFriend()}>asda</button>*/}
         <div className="searchbar">
-          <Search className="searchIcon"  />
+          <Search className="searchIcon" onClick={props.findFriend} />
           <input
-            placeholder="친구 찾기"
+            placeholder="아이디 혹은 닉네임으로 친구찾기"
             className="searchInput"
+            onChange={(event) => {
+              props.setFindId(event.target.value)
+            }}
+            onKeyDown={(e)=>{if(e.key =='Enter')props.findFriend()}}
           />
         </div>
       </div>

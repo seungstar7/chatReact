@@ -60,8 +60,8 @@ app.get('/myprofile/:id',(req, res) => {
 	const paramsData = req.params.id
 	const sqlQuery =  ` select * from users where id = '${paramsData}' `
 	db.query(sqlQuery,(err, result) => {
-		console.log(result)
-		console.log(err)
+		console.log("마이프로필",result)
+		if(err)console.log("에러 발생"+err)
 		res.send(result)
 	})
 })
@@ -184,7 +184,7 @@ app.get("/getlist/:id", (req, res) => {
 						where tf.id='${id}' `;
 	
 	db.query(sqlQuery,(err, result) => {
-		console.log(err);
+		if(err)console.log("에러"+err);
 		res.send(result);
 	});
 });

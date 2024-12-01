@@ -58,7 +58,7 @@ const Login = () => {
       </div>
       <div className="user-box">
       <input
-        type="text"
+        type="password"
         placeholder=''
         onChange={(event) => {
           setPassword(event.target.value)

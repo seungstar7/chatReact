@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import './Modal.css'
 import imagebtn from '../../static/img/image-add.png'
-import rebtn from '../../static/img/refresh.png'
-
-
+// import rebtn from '../../static/img/refresh.png'
+import profile from '../../profileImg/8726390_user_icon.png'
 const Modal = (props) => {
     
 
@@ -87,19 +86,27 @@ const Modal = (props) => {
                     </header>
                     <main>
                         <div>
-                            {isreplace === true ? <img id="preview" /> : <img className="image" src="https://placeimg.com/640/480/any" alt="any"></img>}
-                            {isreplace === true &&
-                                <img
-                                    onClick={() => { if (window.confirm("아직 업로드 되지 않았습니다 되돌리시겠습니까?")) setReplace(false); }}
-                                    src={rebtn}
-                                    style={{
-                                        float: 'right',
-                                        width: '30px',
-                                        height: '30px',
-                                        cursor: 'pointer',
-                                        marginLeft: '20px'
-                                    }}
-                                />}
+                            <img className="image" src={profile}
+                                 style={{
+                                     float: 'left',
+                                     width: '100px',
+                                     height: '100px',
+                                     cursor: 'pointer',
+                                     marginLeft: '20px'
+                                 }}
+                                 alt="any"></img>
+                            {/*{isreplace === true &&*/}
+                            {/*    <img*/}
+                            {/*        onClick={() => { if (window.confirm("아직 업로드 되지 않았습니다 되돌리시겠습니까?")) setReplace(false); }}*/}
+                            {/*        src={rebtn}*/}
+                            {/*        style={{*/}
+                            {/*            float: 'right',*/}
+                            {/*            width: '30px',*/}
+                            {/*            height: '30px',*/}
+                            {/*            cursor: 'pointer',*/}
+                            {/*            marginLeft: '20px'*/}
+                            {/*        }}*/}
+                            {/*    />}*/}
                             <label htmlFor="pic">
                                 <img src={imagebtn} style={{
                                     float: 'right',
@@ -123,7 +130,7 @@ const Modal = (props) => {
                         </div>
                         <br /><br />
                         <div>
-                            <label>닉네임바꾸기 : </label>
+                            <label>닉네임 : </label>
                             <input
                                 type="text"
                                 placeholder={props.data.nickname}
@@ -133,7 +140,7 @@ const Modal = (props) => {
                             />
                         </div>
                         <div>
-                            <label>상태메세지 바꾸기 : </label>
+                            <label>상태메세지  : </label>
                             <input
                                 type="text"
                                 placeholder={props.data.status_msg !== null ? props.data.status_msg : "현재 상태메세지가 없습니다"}

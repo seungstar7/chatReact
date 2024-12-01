@@ -11,21 +11,21 @@ const Display = ({socket , username, room }) => {
     useEffect(() => {
         socket.on(room,(data) => {
             setMessgList((list) => [...list, data])  
-            setTimeout(() => {
-                scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-              }, 100);
+            // setTimeout(() => {
+            //     scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+            //   }, 100);
             //
         })
     }, [socket,room])
     
     useEffect(() => {
-        scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+        // scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
         Axios.get(`http://localhost:3001/getchat/${room}`)
         .then((res) => {
             setMessgList(res.data) 
-            setTimeout(() => {
-                scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-            }, 100);
+            // setTimeout(() => {
+            //     scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+            // }, 100);
         })
     },[room])
 
